@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: microservice-eureka-server-deployment
+spec:
+  template:
+    metadata:
+      name: microservice-eureka-server
+      labels:
+        app: microservice-eureka-server
+    spec:
+      containers:
+        - name: microservice-eureka-server
+          image: jalmeida08/microservice-eureka-server:2
+          ports:
+            - containerPort: 8761
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-eureka-server

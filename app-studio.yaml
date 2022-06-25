@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-studio-deployment
+spec:
+  template:
+    metadata:
+      name: app-studio
+      labels:
+        app: app-studio
+    spec:
+      containers:
+        - name: app-studio-container
+          image: jalmeida08/app-studio:4
+          ports:
+            - containerPort: 80
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-studio
+
+
+
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: app-studio
+#   labels:
+#     app: app-studio
+# spec:
+#   containers:
+#     - name: app-studio-container
+#       image: jalmeida08/app-studio:4
+#       ports:
+#         - containerPort: 80
+

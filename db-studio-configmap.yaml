@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: db-studio-configmap
+data:
+  DB_URL: svc-db-studio
+  DB_PORT: '27017'
+  

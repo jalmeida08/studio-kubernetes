@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-cadastro-basico-deployment
+spec:
+  template:
+    metadata:
+      name: microservice-cadastro-basico
+      labels:
+        app: microservice-cadastro-basico
+    spec:
+      containers:
+        - name: microservice-cadastro-basico
+          image: jalmeida08/microservice-cadastro-basico:13
+          ports:
+            - containerPort: 8082
+          envFrom:
+            - configMapRef:
+                name: microservice-cadastro-basico-configmap
+            - configMapRef:
+                name: db-studio-configmap
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-cadastro-basico

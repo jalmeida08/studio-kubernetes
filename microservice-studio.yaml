@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-studio-deployment
+spec:
+  template:
+    metadata:
+      name: microservice-studio
+      labels:
+        app: microservice-studio
+    spec:
+      containers:
+        - name: microservice-studio
+          image: jalmeida08/microservice-studio:7
+          ports:
+            - containerPort: 8083
+          envFrom:
+            - configMapRef:
+                name: microservice-studio-configmap
+            - configMapRef:
+                name: db-studio-configmap
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-studio

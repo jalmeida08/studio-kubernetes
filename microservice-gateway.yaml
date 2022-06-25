@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-gateway-deployment
+spec:
+  template:
+    metadata:
+      name: microservice-gateway
+      labels:
+        app: microservice-gateway
+    spec:
+      containers:
+        - name: microservice-gateway
+          image: jalmeida08/microservice-gateway:3
+          ports:
+            - containerPort: 5555
+          envFrom:
+            - configMapRef:
+                name: microservice-gateway-configmap
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-gateway

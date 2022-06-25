@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-oauth-deployment
+spec:
+  template:
+    metadata:
+      name: microservice-oauth
+      labels:
+        app: microservice-oauth
+    spec:
+      containers:
+        - name: microservice-oauth
+          image: jalmeida08/microservice-oauth:6
+          ports:
+            - containerPort: 8088
+          envFrom:
+            - configMapRef:
+                name: microservice-oauth-configmap
+            - configMapRef:
+                name: db-studio-configmap
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-oauth

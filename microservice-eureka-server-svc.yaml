@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: microservice-eureka-server-svc
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8761
+  selector:
+    app: microservice-eureka-server

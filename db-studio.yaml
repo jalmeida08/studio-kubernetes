@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db-studio-deployment
+spec: 
+  template:
+    metadata:
+      name: db-studio
+      labels:
+        app: db-studio
+    spec:
+      containers:
+        - name: db-studio-container
+          image: mongo:latest
+          ports:
+            - containerPort: 27017
+          volumeMounts:
+            - name: db
+              mountPath: /data/db
+      volumes:
+        - name: db
+          persistentVolumeClaim: 
+            claimName: db-studio-pvc
+  selector:
+    matchLabels:
+      app: db-studio
+
+#docker pull tutum/mongodb:latest
+#docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no tutum/mongodb

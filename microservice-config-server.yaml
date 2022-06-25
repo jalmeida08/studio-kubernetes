@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: microservice-config-server-deployment
+spec:
+  template:
+    metadata:
+      name: microservice-config-server
+      labels:
+        app: microservice-config-server
+    spec:
+      containers:
+        - name: microservice-config-server
+          image: jalmeida08/microservice-config-server:5
+          ports:
+            - containerPort: 8888
+          envFrom:
+            - configMapRef:
+                name: db-studio-configmap
+      # volumes:
+      #   - name: config-server
+      #     persistentVolumeClaim:
+      #       claimName: config-server-pcv
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-config-server
